@@ -80,15 +80,17 @@ body, html {
              }
 
             button {
-                background: transparent;
-                border:none;
                 color:blue;
                 cursor:pointer;
-                padding:0;
-                margin: 0 .75em;
+                margin: -23% 0px 0% 66%;
+                position: absolute;
             }
 
         }
     }
 
+}
+
+div{
+    margin: 0 10% 0 6%;
 }

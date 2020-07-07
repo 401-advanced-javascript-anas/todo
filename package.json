@@ -7,7 +7,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -19,9 +21,11 @@
   "bugs": {
     "url": "https://github.com/401-advanced-javascript-anas/todo/issues"
   },
-  "homepage": "https://github.com/401-advanced-javascript-anas/todo",
+  "homepage": "https://401-advanced-javascript-anas.github.io/todo/",
   "dependencies": {
+    "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
+    "gh-pages": "^3.1.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",

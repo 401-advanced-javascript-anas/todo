@@ -1,48 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import React from 'react';
+import {Button , Card , Form , } from 'react-bootstrap';
+import useForm from './hooks/hookForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function TodoForm (props) {
-  const [item, setItem] = useState({});
 
+function TodoForm(props){
 
+    const [handleSubmit, handleInputChange] = useForm(callback)
 
-const handleInputChange = e => {
-  setItem({ item: {...item, [e.target.name]: e.target.value } });
-};
+    function callback(item){
+       props.handleSubmit(item)
+    }
+    
+    return (
+      <>
+       <Form onSubmit={handleSubmit}>
+                <Card style={{ width: '18rem' }}>
+                    <Card.Body>
+                        <Card.Title>To Do Item</Card.Title>
+                        <Form.Group controlId="formBasicEmail">
+                        
+                            <Form.Control name="text"   placeholder="Add To Do List Item" onChange={handleInputChange} />
+                            <Form.Text className="text-muted">
+                            We'll never share your email with anyone else.
+                            </Form.Text>
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Difficulty Rating</Form.Label>
+                            <Form.Control defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={handleInputChange} />
+                        </Form.Group>
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  e.target.reset();
-  props.handleSubmit(item);
-  const itemVar = {};
-    setItem(itemVar);
-};
-
-return (
-  <>
-  <h3>Add To Do Item</h3>
-  <Form onSubmit={handleSubmit}>
-    <Form.Label>To Do Item
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Assigned To</Form.Label>
+                            <Form.Control type="text" name="assignee" placeholder="Assigned To" onChange={handleInputChange}  />
+                        </Form.Group>
+                        <Button variant="primary" type='submit'>Add Item</Button>
+                    </Card.Body>
+                </Card>
+            </Form>
       
-        <Form.Control name="text" type="text" placeholder="Item Details" onChange={handleInputChange} /></Form.Label>
-    <Form.Group controlId="formBasicRange">
-      <Form.Label>Difficulty Rating
-      <Form.Control type="range" defaultValue="1" min="1" max="5" name="difficulty" onChange={handleInputChange} /></Form.Label>
-    </Form.Group>
-    <Form.Label>Assigned To
-        <Form.Control type="text" name="assignee" placeholder="Assigned To" onChange={handleInputChange} /></Form.Label>
-    <Button variant="primary" type="submit">
-      Add Item
-      </Button>
-
-  </Form>
-
-</>
-);
-
+      </>
+    );
+  
 }
-
 
 export default TodoForm;

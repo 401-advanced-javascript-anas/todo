@@ -4,12 +4,13 @@ import TodoList from './list.js';
 
 import './todo.scss';
 
-const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
+// const todoAPI = 'https://api-js401.herokuapp.com/api/v1/todo';
 
 
 const ToDo = () => {
 
   const [list, setList] = useState([]);
+
 
   const _addItem = (item) => {
     item.due = new Date();
@@ -26,6 +27,7 @@ const ToDo = () => {
       })
       .catch(console.error);
   };
+
 
   const _toggleComplete = id => {
 
@@ -51,6 +53,7 @@ const ToDo = () => {
         .catch(console.error);
     }
   };
+
 
   const _getTodoItems = () => {
     fetch(todoAPI, {
