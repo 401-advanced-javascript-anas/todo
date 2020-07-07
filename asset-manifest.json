@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/401-advanced-javascript-anas/todo/static/css/main.b06360a0.chunk.css",
+    "main.js": "/401-advanced-javascript-anas/todo/static/js/main.64b43fab.chunk.js",
+    "main.js.map": "/401-advanced-javascript-anas/todo/static/js/main.64b43fab.chunk.js.map",
+    "runtime-main.js": "/401-advanced-javascript-anas/todo/static/js/runtime-main.fa55c750.js",
+    "runtime-main.js.map": "/401-advanced-javascript-anas/todo/static/js/runtime-main.fa55c750.js.map",
+    "static/css/2.af3c1da9.chunk.css": "/401-advanced-javascript-anas/todo/static/css/2.af3c1da9.chunk.css",
+    "static/js/2.c0ff4630.chunk.js": "/401-advanced-javascript-anas/todo/static/js/2.c0ff4630.chunk.js",
+    "static/js/2.c0ff4630.chunk.js.map": "/401-advanced-javascript-anas/todo/static/js/2.c0ff4630.chunk.js.map",
+    "index.html": "/401-advanced-javascript-anas/todo/index.html",
+    "precache-manifest.042996f6b46d27fe0d3b190ef4cc66ad.js": "/401-advanced-javascript-anas/todo/precache-manifest.042996f6b46d27fe0d3b190ef4cc66ad.js",
+    "service-worker.js": "/401-advanced-javascript-anas/todo/service-worker.js",
+    "static/css/2.af3c1da9.chunk.css.map": "/401-advanced-javascript-anas/todo/static/css/2.af3c1da9.chunk.css.map",
+    "static/css/main.b06360a0.chunk.css.map": "/401-advanced-javascript-anas/todo/static/css/main.b06360a0.chunk.css.map",
+    "static/js/2.c0ff4630.chunk.js.LICENSE.txt": "/401-advanced-javascript-anas/todo/static/js/2.c0ff4630.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fa55c750.js",
+    "static/css/2.af3c1da9.chunk.css",
+    "static/js/2.c0ff4630.chunk.js",
+    "static/css/main.b06360a0.chunk.css",
+    "static/js/main.64b43fab.chunk.js"
+  ]
+}
