@@ -13,6 +13,7 @@ body, html {
         flex-direction:row;
         justify-content:space-between;
         padding:.5em 1em;
+        
     }
 
     .item {
@@ -91,6 +92,44 @@ body, html {
 
 }
 
+h2#h2 {
+    text-align: center;
+    background: #383535;
+    color: white;
+    margin: 0% 15% 0 15%;
+    padding: 1% 0 1% 0%;
+}
+
 div{
-    margin: 0 10% 0 6%;
+    margin: 0 5% 0 5%;
+}
+
+button.show{
+    margin-left: 45%;
+    background-color: #dcd3d3;
+    margin-top: 1%;
+    border-radius: 10px;
+    border: px solid;
+}
+
+p.btnDelete {
+    text-align: end;
+    cursor: pointer;
+    margin-right: 4%;
+    font-size: 17px;
+}
+
+input[type=checkbox], input[type=radio] {
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 0.5% 0% 0% 0%;
+    position: absolute;
+}
+
+div.difficulty{
+    border: 1px solid #dfdfdf;
+    height: 100%;
+    text-align: center;
+    padding-left: 4%;
+    width: 17%;
 }

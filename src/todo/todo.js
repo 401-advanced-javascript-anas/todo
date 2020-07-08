@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TodoForm from './form.js';
 import TodoList from './list.js';
 import useAjax from './hooks/Ajax';
 import './todo.scss';
-
+import { SettingsContext } from './context/site';
 
 function ToDo(props) {
-
+  const siteContext = useContext(SettingsContext);
   let url = `https://lab32-401.herokuapp.com/todo`
 
   const [list, setList] = useState([]);
@@ -20,10 +20,13 @@ function ToDo(props) {
 
   const toggleComplete = id => {
     let item = list.filter(i => i._id === id)[0] || {};
+
     if (item._id) {
       item.complete = !item.complete;
-      let z = list.map(listItem => listItem._id === item._id ? item : listItem);
-      setList([...z])
+      let listing = list.map(listItem => listItem._id === item._id ? item : listItem);
+      setList([...listing])
+
+
       let data = item;
       putElement(url, data)
     }
@@ -35,7 +38,6 @@ function ToDo(props) {
   }, [list]);
   useEffect(() => {
     getElement(url);
-    
   }, [list]);
 
 
@@ -49,28 +51,49 @@ function ToDo(props) {
 
   return (
     <>
-      <main>
-        <header>
-          <h2 className='toDoHeader'>
-            TO DO LIST ({list.filter(item => !item.complete).length})
-          </h2>
-        </header>
+       <main>
+      <header className="header-TODO">
+        <h2 id='h2'>TO DO LIST Manager ({list.filter(item => !item.complete).length}) </h2>
+      </header>
+      <button className='show' onClick={e => siteContext.setShow(!siteContext.show)}>
+          complete/pending
+      </button>
+      <section className="todo">
 
-        <section className="todo">
+        <div class='difficulty'>
+          <form onChange={e => siteContext.changeSort(e.target.value)}>
+            <label >
+              <input type="radio" name="sort" value='difficulty' />
+            difficulty
+              </label>
+            <label >
+              <input type="radio" name="sort" value='complete' />
+            complete
+          </label>
+          <label >
+              <input type="radio" name="sort" value='assignee' />
+            assignee
+          </label>
+          <label >
+              <input  type="radio" name="sort" value='none' />
+            none
+          </label>
+          </form>
 
-          <div>
-            <TodoForm handleSubmit={addItem} />
-          </div>
+        </div>
+        <div>
+          <TodoForm handleSubmit={addItem} />
+        </div>
 
-          <div>
-            <TodoList
-              list={list}
-              handleComplete={toggleComplete}
-              deleteNote={deleteComplete}
-            />
-          </div>
-        </section>
-      </main>
+        <div>
+          <TodoList
+            list={list}
+            handleComplete={toggleComplete}
+            handleDelete={deleteComplete}
+          />
+        </div>
+      </section>
+    </main>
     </>
   );
 

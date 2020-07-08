@@ -1,41 +1,76 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { SettingsContext } from './context/site';
 
+let arr;
 
 function TodoList(props) {
 
+  const siteContext = useContext(SettingsContext);
+  const [buttonIdx, setbuttonIdx] = useState(0);
+
+  const buttonIndex = (pageNumber) => {
+    let newArr = props.list.filter(element => {
+      return !siteContext.show ? true : !element.complete;
+    });
+    
+    let btns = Math.floor(newArr.length / pageNumber + (newArr.length % pageNumber > 0 ? 1 : 0));
+    arr = new Array(btns).fill(0);
+  };
+
+  buttonIndex(siteContext.elementPerPage);
+
+
+  function compare(a, b) {
+    a = a[siteContext.sort];
+    b = b[siteContext.sort];
+
+    if (a < b) return -1;
+    if (a > b) return 1;
+    return 0;
+  }
+
+
+
+
   return (
-    <ul>
-      {props.list.map(item => (
-        <li
-          className={`complete-${item.complete.toString()}`}
-          key={item._id}
-        >
-          <Card style={{ width: '22rem' }}>
-            <Card.Body>
-              <div className="topname">
-                <h3 onClick={() => props.handleComplete(item._id)}>
+    <>
+    <div>
+    {arr.map((element, idx) => (<button key={idx} onClick={e => setbuttonIdx(idx)}>{idx}</button>))}
+  </div>
 
-                  {`${item.complete ? 'complete' : 'pending'}`}
 
-                </h3>
-                <Card.Title className='name' variant='border-bottom border-dark'>
+  <ul>
+        {props.list
+          .filter(element => !siteContext.show ? true : !element.complete)
+          .sort(compare)
+          .slice(buttonIdx * siteContext.elementPerPage, buttonIdx * siteContext.elementPerPage + siteContext.elementPerPage)
+          .map(item => (
+            <li
+              key={item._id}
+            >
+              <Card style={{ width: '18rem', padding: '5px' }} >
+                <p onClick={() => props.handleDelete(item._id)} className='btnDelete'>X</p>
+                <Card.Title className='card-title'>
+                  <p className={`status status-${item.complete.toString()}`} onClick={() => props.handleComplete(item._id)}>
+                    {`${item.complete ? 'complete' : 'pending'}`}
+                  </p>
                   {item.assignee}
                 </Card.Title>
-                <button className="xButton" onClick={() => props.deleteNote(item._id)}>X</button>
-              </div>
+                <Card.Body >
+                  {item.text}
+                  <div className="diff">Difficulty: {item.difficulty}</div>
+                </Card.Body>
+              </Card>
+            </li>
+          )
+          )
+        }
+      </ul>
 
-
-              <div className='contentInformation' >  {item.text} </div>
-              <div className='diff'> Difficulty : {item.difficulty}</div>
-
-
-            </Card.Body>
-          </Card>
-        </li>
-      ))}
-    </ul>
+    </>
+  
   );
 
 }
