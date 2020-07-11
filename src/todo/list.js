@@ -2,12 +2,16 @@ import React, { useState, useContext } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { SettingsContext } from './context/site';
+import {LoginContext} from './context/loginContext';
+import Auth from './auth';
 
 let arr;
 
 function TodoList(props) {
 
   const siteContext = useContext(SettingsContext);
+  const loginContext = useContext(LoginContext);
+
   const [buttonIdx, setbuttonIdx] = useState(0);
 
   const buttonIndex = (pageNumber) => {
@@ -52,12 +56,17 @@ function TodoList(props) {
             >
               <Card style={{ width: '18rem', padding: '5px' }} >
                 <p onClick={() => props.handleDelete(item._id)} className='btnDelete'>X</p>
+
                 <Card.Title className='card-title'>
-                  <p className={`status status-${item.complete.toString()}`} onClick={() => props.handleComplete(item._id)}>
-                    {`${item.complete ? 'complete' : 'pending'}`}
+                  <p className={`status status-${item.complete.toString()}`} 
+                     onClick={loginContext.user.capabilities.includes('update') ?
+                     () => props.handleComplete(item._id): null }
+                   >
+                   {`${item.complete ? 'complete' : 'pending'}`}
                   </p>
                   {item.assignee}
                 </Card.Title>
+
                 <Card.Body >
                   {item.text}
                   <div className="diff">Difficulty: {item.difficulty}</div>

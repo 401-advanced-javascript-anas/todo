@@ -22,7 +22,7 @@ function TodoForm(props){
                         
                             <Form.Control name="text"   placeholder="Add To Do List Item" onChange={handleInputChange} />
                             <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
+                            your email will remain a secret
                             </Form.Text>
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">

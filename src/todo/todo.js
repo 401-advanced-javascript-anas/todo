@@ -4,6 +4,7 @@ import TodoList from './list.js';
 import useAjax from './hooks/Ajax';
 import './todo.scss';
 import { SettingsContext } from './context/site';
+import Auth from './auth';
 
 function ToDo(props) {
   const siteContext = useContext(SettingsContext);
@@ -36,6 +37,7 @@ function ToDo(props) {
   useEffect(() => {
     document.title = `TO DO LIST ${list.filter(item => !item.complete).length}`
   }, [list]);
+
   useEffect(() => {
     getElement(url);
   }, [list]);
@@ -46,6 +48,7 @@ function ToDo(props) {
     list.splice(idx, 1);
     setList([...list])
     deleteElement(url, id)
+    setList([...list])
   }
 
 
@@ -81,9 +84,12 @@ function ToDo(props) {
           </form>
 
         </div>
-        <div>
-          <TodoForm handleSubmit={addItem} />
-        </div>
+
+         <Auth capability="update">
+          <div>
+            <TodoForm handleSubmit={addItem} />
+          </div>
+        </Auth>
 
         <div>
           <TodoList
